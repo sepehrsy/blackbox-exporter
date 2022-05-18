@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  node:
+    image: docker/prom/node-exporter:latest
+    restart: always
+    ports:
+      - 9100:9100
+
+  blackbox:
+    image: docker/prom/blackbox-exporter:latest
+    restart: always
+    privileged: true
+    volumes:
+      - /blackbox-exporter/blackbox.yml:/etc/blackbox_exporter/config.yml
+    ports:
+      - "9115:9115"
